@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<!-- Ниже строчка, которая указывает, что мы используем таймлиф -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Пользователь</title>
+</head>
+<body>
+<!-- Сюда мы переходим по ссылке из view "all" по id. Вместо VALUE будет то значение,
+которое получится при вызове геттеров-->
+<p th:text="${user.getId()}">VALUE</p>
+<p th:text="${user.getName()}">VALUE</p>
+<p th:text="${user.getLastName()}">VALUE</p>
+<p th:text="${user.getAge()}">VALUE</p>
+
+
+</body>
+</html>

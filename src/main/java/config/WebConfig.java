@@ -8,13 +8,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 // Интерфейс WebMvcConfigurer реализуется тогда, когда мы под себя хотим реализовать Spring MVC.
-// В данном случае, мы вместо стандартного шаблонизатора хотим использовать thymeleaf (таймлИф)
+// В данном случае, мы вместо стандартного шаблонизатора хотим использовать thymeleaf (таймлИф), поэтому мы имплементим этот интерфейс
 
 //Этот класс - замена файлу с описанием ДиспетчерСервлета. Теперь вся конфигурация ДиспетчерСервлета будет в этом классе.
 @Configuration
@@ -34,22 +33,11 @@ public class WebConfig implements WebMvcConfigurer {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/view/");
+        templateResolver.setPrefix("/WEB-INF/views/users");
         templateResolver.setSuffix(".html");
         templateResolver.setCharacterEncoding("UTF-8"); //Добавляем, чтобы отображались кириллические символы на web-странице
         return templateResolver;
     }
-
-    // Это настройка д/views. viewResolver - распознавать view
-//    @Bean
-//    public FreeMarkerViewResolver viewResolver () {
-//        FreeMarkerViewResolver viewResolver = new FreeMarkerViewResolver();
-//        viewResolver.setSuffix(".html");
-//        viewResolver.setPrefix("/WEB-INF/views/");
-//        viewResolver.setContentType("UTF-8");
-//        viewResolver.setCache(false); //Не хотим кэшировать таймплэйты (шаблоны)
-//        return viewResolver;
-//    }
 
 
     @Bean

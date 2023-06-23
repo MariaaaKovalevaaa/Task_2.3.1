@@ -38,7 +38,7 @@ public class UserDAOImpl implements UserDAO {
     //Метод persist() - вводит новый экземпляр сущности в персистентный контекст, т.е. в контекст EntityManager'а
     //Это сохранение
     @Override
-    public void addUser(User user) throws SQLException {
+    public void addUser(User user) {
         entityManager.persist(user);
 
     }
@@ -50,9 +50,13 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public void updateUser (long id) {
+    public void updateUser (long id, String name, String lastName, byte age) {
         User user = entityManager.find(User.class, id);
-        user.
+        user.setName(name);
+        user.setLastName(lastName);
+        user.setAge(age);
+        entityManager.persist(user);
+
     }
 
 }

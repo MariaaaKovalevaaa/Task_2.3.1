@@ -1,6 +1,9 @@
 package config;
 
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import javax.servlet.ServletContext;
+
 
 // Класс AbstractAnnotationConfigDispatcherServletInitializer реализует интерфейс WebApplicationInitializer.
 //WebApplicationInitializer – это интерфейс, предоставляемый Spring MVC,
@@ -12,6 +15,7 @@ import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatche
 
 //Класс AbstractAnnotationConfigDispatcherServletInitializer - это замена конфигурационному файлу "web.xml"
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
+
 
     // Метод, указывающий на классы конфигурации, т.е. просто их здесь перечисляем
     @Override
@@ -28,9 +32,8 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     //Здесь нужно указать класс, который будет описывать наш ДиспетчерСервлет
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[]{
-                WebConfig.class
-        };
+        return new Class []{
+                WebConfig.class };
     }
 
 
@@ -40,5 +43,4 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     protected String[] getServletMappings()  {
         return new String[]{"/"};
     }
-
 }

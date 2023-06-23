@@ -1,7 +1,6 @@
 package service;
 
 import dao.UserDAO;
-import jakarta.persistence.PersistenceContext;
 import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,7 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public void addUser(User user) throws SQLException {
+    public void addUser(User user) {
         userDAO.addUser(user);
     }
 
@@ -36,7 +35,7 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public void updateUser(long id) {
-        userDAO.updateUser(id);
+    public void updateUser(long id, String name, String lastName, byte age) {
+        userDAO.updateUser(id, name, lastName, age);
     }
 }

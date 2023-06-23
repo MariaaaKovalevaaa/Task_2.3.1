@@ -1,9 +1,75 @@
 package controller;
 
+import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import service.UserService;
 
-@Controller
+import java.util.List;
+
+@Controller ("/users")
 public class UsersController {
 
+    @Autowired
+    UserService userService;
 
+    //Получаем всех юзеров и передаем это на отображение во view "all_users"
+    //Это метод GET/users
+    @GetMapping()
+    public String getAllUsers(Model model) {
+        model.addAttribute("allUsers", userService.getAllUsers()); //здесь пара ключ-значение
+        return "users/all";
+    }
+
+    // Получаем одного юзера по id и передаем его на отображение во view "user_by_id"
+    //Это метод GET/users/id
+    @GetMapping("/{id}")
+    public String getUserById(@PathVariable("id") long id, Model model) {
+        model.addAttribute("user", userService.getUserById(id));
+        return "users/showUser";
+    }
+
+
+    //Это метод GET/users/new, при котором мы получаем форму для заполнения полей
+    // д/создания нового юзера (изначально он здесь пустой)
+    // Аннотация @ModelAttribute делает: создание нового объекта, добавление значений
+    // в поля этого объекта, которые берет из http-запроса и затем добавление этого объекта в модель
+    // @GetMapping, потому что при запросе мы получим html-форму
+    // Этот метод возвращает html-форму для создания нового человека
+    @GetMapping("/new")
+    public String newUser(Model model) {
+        model.addAttribute("user", new User());
+        return "users/new";
+    }
+
+    //Это метод POST/users - создаем нового юзера
+    //Аннотация @ModelAttribute создаст юзера с теми значениями, которые придут из формы
+    //Метод, который принимает post-запрос, берет данные из html-формы и добавляет нового юзера в БД
+    //@PostMapping, потому что при запросе будут отправлены параметры-значения д/нового юзера, поэтому это post-запрос
+    //В скобках нет url-адреса, потому что мы попадаем сюда из "/new"
+    //User user - это созданный юзер по html-форме, которая реализована во view "new"
+    //Здесь использован механизм redirect, который говорит браузеру перейти на какую-то другую страницу.
+    //Д/этого пишем "redirect:" и после двоеточия пишем url-адрес той страницы, на которую нужно перенаправить
+    @PostMapping()
+    public String addUser(@ModelAttribute("user") User user) {
+        userService.addUser(user); // Добавляем этого юзера в БД
+        return "redirect:/users";
+    }
+
+//    // Находим одного юзера по id, удаляем его и передаем это на отображение во view "remove_user"
+//    @GetMapping("/remove/{id}") {
+//        public String removeUserById ( @PathVariable("id") long id, Model model){
+//
+//        }
+//    }
+//
+//    //отображение во view "update_user"
+//    @GetMapping("/update/{id}") {
+//        public String updateUser ( @PathVariable("id") long id, Model model){
+//        }
+//
+//    }
 }
+

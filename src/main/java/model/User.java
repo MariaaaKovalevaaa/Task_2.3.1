@@ -1,14 +1,14 @@
 package model;
+import javax.persistence.*;
 
-import jakarta.persistence.*;
 
 @Entity //Т.е. этот класс будет отображаться в БД в виде таблицы
-@Table (name = "users")//указываем, к какой именно таблице мы привязываем класс
+@Table(name = "users")//указываем, к какой именно таблице мы привязываем класс
 public class User {
 
     @Id // Этой аннотацией помечаем, что поле Id - primary key
-    @GeneratedValue (strategy = GenerationType.IDENTITY) // описывает стратегию по генерации значений д/столбца Id (автоматическое увеличение в этом случае)
-    @Column (name = "id") // указываем, с каким столбцом в таблице users нашей БД связано это поле
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // описывает стратегию по генерации значений д/столбца Id (автоматическое увеличение в этом случае)
+    @Column(name = "id") // указываем, с каким столбцом в таблице users нашей БД связано это поле
     private Long id;
 
     @Column (name = "name")
