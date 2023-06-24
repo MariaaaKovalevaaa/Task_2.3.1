@@ -7,7 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import service.UserService;
 
-@Controller ("/users")
+@Controller
 public class UsersController {
 
     @Autowired
@@ -15,10 +15,10 @@ public class UsersController {
 
     //Получаем всех юзеров и передаем это на отображение во view "all_users"
     //Это метод GET/users
-    @GetMapping()
+    @GetMapping("/")
     public String getAllUsers(Model model) {
         model.addAttribute("allUsers", userService.getAllUsers()); //здесь пара ключ-значение
-        return "users/all";
+        return "all";
     }
 
     // Получаем одного юзера по id и передаем его на отображение во view "user_by_id"
@@ -26,7 +26,7 @@ public class UsersController {
     @GetMapping("/{id}")
     public String getUserById(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
-        return "users/showUser";
+        return "showUser";
     }
 
 
@@ -39,7 +39,7 @@ public class UsersController {
     @GetMapping("/new")
     public String newUser(Model model) {
         model.addAttribute("user", new User());
-        return "users/new";
+        return "new";
     }
 
     //Это метод POST/users - создаем нового юзера
@@ -64,7 +64,7 @@ public class UsersController {
     @GetMapping("/{id}/edit")
     public String edit (Model model, @PathVariable("id") long id ){
         model.addAttribute("user",userService.getUserById(id));
-        return "users/edit";
+        return "edit";
     }
 
     //Метод, который принимает html-запрос на адрес "/users/id", т.е. во view "edit" форму заполнили,
