@@ -20,7 +20,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @Configuration
 @EnableWebMvc //Перевод - "делать возможным WebMvc", т.е. используется для включения Spring MVC в приложении
 @EnableTransactionManagement
-@ComponentScan(value = "java")
+@ComponentScan("java")
 public class WebConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;
@@ -35,8 +35,10 @@ public class WebConfig implements WebMvcConfigurer {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/webapp/WEB-INF/views/users");
+        templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("HTML");
+        templateResolver.setCacheable(false);
         templateResolver.setCharacterEncoding("UTF-8"); //Добавляем, чтобы отображались кириллические символы на web-странице
         return templateResolver;
     }

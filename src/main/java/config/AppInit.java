@@ -1,8 +1,12 @@
 package config;
 
+import jakarta.servlet.FilterRegistration;
 import jakarta.servlet.ServletContext;
+import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+
+import java.util.logging.Filter;
 
 
 // Класс AbstractAnnotationConfigDispatcherServletInitializer реализует интерфейс WebApplicationInitializer.
@@ -52,8 +56,20 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     // значение которого будет PATCH
     //В Спринг Boot эти методы можно будет заменить одной строкой
     @Override
+    protected jakarta.servlet.Filter[] getServletFilters() {
+        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        characterEncodingFilter.setEncoding("UTF-8");
+        characterEncodingFilter.setForceEncoding(true);
+        return (jakarta.servlet.Filter[]) new Filter[] {(Filter) characterEncodingFilter};
+    }
+
+    @Override
     public void onStartup(ServletContext aServletContext) throws jakarta.servlet.ServletException {
         super.onStartup(aServletContext);
+        FilterRegistration.Dynamic encodingFilter = aServletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
+        encodingFilter.setInitParameter("encoding", "UTF-8");
+        encodingFilter.setInitParameter("forceEncoding", "true");
+        encodingFilter.addMappingForUrlPatterns(null, true, "/*");
         registerHiddenFieldFilter(aServletContext);
     }
 
