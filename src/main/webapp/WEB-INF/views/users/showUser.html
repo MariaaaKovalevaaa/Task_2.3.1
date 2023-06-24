@@ -13,9 +13,19 @@
 которое получится при вызове геттеров-->
 <p th:text="${user.getId()}">VALUE</p>
 <p th:text="${user.getName()}">VALUE</p>
-<p th:text="${user.getLastName()}">VALUE</p>
+<p th:text="${user.getSurname()}">VALUE</p>
 <p th:text="${user.getAge()}">VALUE</p>
 
+<!-- Добавим ссылку для перехода на страницу редактирования-->
+<a th:href="@{/users/{id}/edit (id = ${user.getId()})}">Редактировать</a>
+
+<!-- Добавим кнопку для перехода на страницу удаления
+th:action - это то, куда направляется запрос
+При нажатии на кнопку "Delete" будет совершаться delete-запрос на адрес /users/{id}
+-->
+<form th:method="DELETE" th:action="@{/users/{id} (id = ${user.getId()})}">
+    <input type = "submit" value = "Delete"/>
+</form>
 
 </body>
 </html>

@@ -77,15 +77,15 @@ public class UsersController {
     }
 
 
+    @DeleteMapping ("/{id}")
+    public String delete (@PathVariable ("id") long id) {
+        userService.delete(id);
+        return "redirect:/users"; // После удаления делаем редирект на /users
+    }
 
 }
 
-//    //отображение во view "update_user"
-//    @GetMapping("/update/{id}") {
-//        public String updateUser ( @PathVariable("id") long id, Model model){
-//        }
-//
-//    }
+
 
 
 

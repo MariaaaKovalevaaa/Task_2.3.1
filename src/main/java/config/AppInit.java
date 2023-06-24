@@ -1,8 +1,8 @@
 package config;
 
+import jakarta.servlet.ServletContext;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-import javax.servlet.ServletContext;
 
 
 // Класс AbstractAnnotationConfigDispatcherServletInitializer реализует интерфейс WebApplicationInitializer.
@@ -42,5 +42,23 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     @Override
     protected String[] getServletMappings()  {
         return new String[]{"/"};
+    }
+
+
+    // Ниже два метода добавлены д/того, чтобы на стороне Спринга обрабатывалось скрытое hidden-поле "_method",
+    // где находится реальный http-метод, который мы хотим использовать. В нашем случае - PATCH.
+    //Это сделано д/того, чтобы корректно работал метод update в контроллере, у которого аннотация @PatchMapping ("/{id}")
+    //Д/его корректной работы мы ниже создаем фильтр, который будет читать скрытое hidden-поле "_method",
+    // значение которого будет PATCH
+    //В Спринг Boot эти методы можно будет заменить одной строкой
+    @Override
+    public void onStartup(ServletContext aServletContext) throws jakarta.servlet.ServletException {
+        super.onStartup(aServletContext);
+        registerHiddenFieldFilter(aServletContext);
+    }
+
+    private void registerHiddenFieldFilter(ServletContext aContext) {
+        aContext.addFilter("hiddenHttpMethodFilter",
+                new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");
     }
 }

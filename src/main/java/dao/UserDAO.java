@@ -11,6 +11,6 @@ public interface UserDAO {
 
     void addUser(User user); //запрос update
 
-    void removeUserById(long id); //запрос delete
+    void delete(long id); //запрос delete
     void updateUser (long id, User updateUser);
 }
