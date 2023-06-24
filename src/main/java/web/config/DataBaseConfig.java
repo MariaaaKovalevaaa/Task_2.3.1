@@ -17,7 +17,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement //означает, что классы, помеченные @Transactional, должны быть обернуты аспектом транзакций.
-@ComponentScan(value = "java")
+@ComponentScan(value = "web")
 public class DataBaseConfig {
 
     @Bean
