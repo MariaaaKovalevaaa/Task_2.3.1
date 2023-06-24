@@ -1,11 +1,11 @@
-package dao;
+package web.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
-import model.User;
 import org.springframework.stereotype.Repository;
+import web.model.User;
 import java.util.List;
 
 @Repository

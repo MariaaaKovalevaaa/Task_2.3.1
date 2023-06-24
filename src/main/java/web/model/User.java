@@ -1,4 +1,4 @@
-package model;
+package web.model;
 
 import jakarta.persistence.*;
 
@@ -73,4 +73,3 @@ public class User {
                 '}';
     }
 }
-

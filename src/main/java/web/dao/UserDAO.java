@@ -1,12 +1,13 @@
-package dao;
+package web.dao;
 
-import model.User;
+
+import web.model.User;
 
 import java.util.List;
 
 public interface UserDAO {
 
-    List <User> getAllUsers(); // запрос select
+    List<User> getAllUsers(); // запрос select
     User getUserById (long id);
 
     void addUser(User user); //запрос update

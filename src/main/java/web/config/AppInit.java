@@ -1,11 +1,10 @@
-package config;
+package web.config;
 
 import jakarta.servlet.FilterRegistration;
 import jakarta.servlet.ServletContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
 import java.util.logging.Filter;
 
 

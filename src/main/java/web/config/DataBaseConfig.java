@@ -1,4 +1,4 @@
-package config;
+package web.config;
 
 import com.mchange.v2.c3p0.DriverManagerDataSource;
 import org.springframework.context.annotation.Bean;
