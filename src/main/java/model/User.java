@@ -1,5 +1,6 @@
 package model;
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 
 
 @Entity //Т.е. этот класс будет отображаться в БД в виде таблицы
@@ -14,8 +15,8 @@ public class User {
     @Column (name = "name")
     private String name;
 
-    @Column (name = "lastName")
-    private String lastName;
+    @Column (name = "surname")
+    private String surname;
 
     @Column (name = "age")
     private Byte age;
@@ -24,9 +25,9 @@ public class User {
 
     }
 
-    public User(String name, String lastName, Byte age) {
+    public User(String name, String surname, Byte age) {
         this.name = name;
-        this.lastName = lastName;
+        this.surname = surname;
         this.age = age;
     }
 
@@ -46,12 +47,12 @@ public class User {
         this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public Byte getAge() {
@@ -67,7 +68,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", surname='" + surname + '\'' +
                 ", age=" + age +
                 '}';
     }

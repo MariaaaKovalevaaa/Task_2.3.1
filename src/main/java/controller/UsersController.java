@@ -7,8 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import service.UserService;
 
-import java.util.List;
-
 @Controller ("/users")
 public class UsersController {
 
@@ -45,7 +43,8 @@ public class UsersController {
     }
 
     //Это метод POST/users - создаем нового юзера
-    //Аннотация @ModelAttribute создаст юзера с теми значениями, которые придут из формы
+    //Аннотация @ModelAttribute создаст юзера с теми значениями, которые придут из формы. Мы
+    // здесь принимает в аргумент юзера, который пришел из заполненной формы
     //Метод, который принимает post-запрос, берет данные из html-формы и добавляет нового юзера в БД
     //@PostMapping, потому что при запросе будут отправлены параметры-значения д/нового юзера, поэтому это post-запрос
     //В скобках нет url-адреса, потому что мы попадаем сюда из "/new"
@@ -58,18 +57,35 @@ public class UsersController {
         return "redirect:/users";
     }
 
-//    // Находим одного юзера по id, удаляем его и передаем это на отображение во view "remove_user"
-//    @GetMapping("/remove/{id}") {
-//        public String removeUserById ( @PathVariable("id") long id, Model model){
-//
-//        }
-//    }
-//
+    // Находим одного юзера по id, удаляем его и передаем это на отображение во view "remove_user"
+    //Метод возвращает форму для редактирования юзера
+    //Помещаем в модель юзера с переданным id, потом передаем этого юзера на отображение,
+    // где будет форма по его редактированию
+    @GetMapping("/{id}/edit")
+    public String edit (Model model, @PathVariable("id") long id ){
+        model.addAttribute("user",userService.getUserById(id));
+        return "users/edit";
+    }
+
+    //Метод, который принимает html-запрос на адрес "/users/id", т.е. во view "edit" форму заполнили,
+    // нажали кнопку "Внести изменения..." и на перебросит на url-адрес "/users/id"
+    //@PatchMapping, потому что мы вносим при этом изменения
+    @PatchMapping ("/{id}")
+    public String update (@ModelAttribute ("user") User updateUser, @PathVariable ("id") long id) {
+        userService.updateUser(id, updateUser); //Находим по id того юзера, которого надо изменить
+        return "redirect:/users";
+    }
+
+
+
+}
+
 //    //отображение во view "update_user"
 //    @GetMapping("/update/{id}") {
 //        public String updateUser ( @PathVariable("id") long id, Model model){
 //        }
 //
 //    }
-}
+
+
 

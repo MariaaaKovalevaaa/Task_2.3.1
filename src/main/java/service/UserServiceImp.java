@@ -5,7 +5,6 @@ import model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Service
@@ -35,7 +34,7 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public void updateUser(long id, String name, String lastName, byte age) {
-        userDAO.updateUser(id, name, lastName, age);
+    public void updateUser (long id, User updateUser) {
+        userDAO.updateUser(id, updateUser);
     }
 }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<!-- Ниже строчка, которая указывает, что мы используем таймлиф -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование пользователя</title>
+</head>
+<body>
+
+<!-- Метод PATCH, потому что это изменение -->
+
+<form th:method="PATCH" th:action="@{/users/{id} (id = ${user.getId()}}" th:object="${user}">
+
+    <label for="name"> Введите имя: <label/>  <!-- Эта метка для input, id которого "name"-->
+        <input type="text" th:field="*{name}" id="name" />
+        <br/> <!--Это пустая строка-->
+
+    <label for="lastName"> Введите фамилию: <label/>  <!-- Эта метка для input, id которого "name"-->
+        <input type="text" th:field="*{lastName}" id="lastName" />
+        <br/> <!--Это пустая строка-->
+
+    <label for="age"> Введите возраст: <label/>  <!-- Эта метка для input, id которого "name"-->
+        <input type="number" th:field="*{age}" id="age"/>
+        <br/> <!--Это пустая строка-->
+
+        <input type="submit" value="Внести изменения в данные пользователя"/> <!--Это кнопка, нажав которую мы
+     данные с этой формы отправим post-запросом на адрес /all. А в контроллере в методе newUser
+     будут назначены значения полям объекту User user-->
+
+</form>
+</body>
+</html>

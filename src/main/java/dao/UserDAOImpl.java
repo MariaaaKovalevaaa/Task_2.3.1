@@ -6,8 +6,6 @@ import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import model.User;
 import org.springframework.stereotype.Repository;
-
-import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -49,14 +47,13 @@ public class UserDAOImpl implements UserDAO {
         entityManager.remove(user);
     }
 
+    //updatedUser - это то, что пришло с формы редактирования юзера
     @Override
-    public void updateUser (long id, String name, String lastName, byte age) {
-        User user = entityManager.find(User.class, id);
-        user.setName(name);
-        user.setLastName(lastName);
-        user.setAge(age);
+    public void updateUser (long id, User updatedUser) {
+        User user = entityManager.find(User.class, id); // по id определили, какой именно юзер был изменен и передан в аргумент
+        user.setName(updatedUser.getName()); //этому найденному юзеру устанавливаем значения того юзера, который пришел из формы
+        user.setSurname(updatedUser.getSurname());
+        user.setAge(updatedUser.getAge());
         entityManager.persist(user);
-
     }
-
 }
