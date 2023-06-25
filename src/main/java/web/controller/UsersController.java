@@ -22,7 +22,7 @@ public class UsersController {
     //Это метод GET/users
     @GetMapping()
     public String getAllUsers(Model model) {
-        model.addAttribute("allUsers", userService.getAllUsers()); //здесь пара ключ-значение
+        model.addAttribute("users", userService.getAllUsers()); //здесь пара ключ-значение
         return "users/all";
     }
 
@@ -31,7 +31,7 @@ public class UsersController {
     @GetMapping("/{id}")
     public String getUserById(@PathVariable("id") long id, Model model) {
         model.addAttribute("user", userService.getUserById(id));
-        return "showUser";
+        return "users/showUser";
     }
 
 

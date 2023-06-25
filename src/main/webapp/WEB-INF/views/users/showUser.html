@@ -25,7 +25,7 @@ th:action - это то, куда направляется запрос
 При нажатии на кнопку "Delete" будет совершаться delete-запрос на адрес /users/{id}
 -->
 <form th:method="DELETE" th:action="@{/users/{id} (id = ${user.getId()})}">
-    <input type = "submit" value = "Delete"/>
+    <input type = "submit" value = "Удалить пользователя"/>
 </form>
 
 </body>

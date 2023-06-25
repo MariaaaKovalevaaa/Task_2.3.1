@@ -1,11 +1,13 @@
 package web.dao;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
+
 import org.springframework.stereotype.Repository;
 import web.model.User;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -25,7 +27,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User getUserById (long id) {
-        TypedQuery <User> query = entityManager.createQuery("select u from User u where u.id = :id", User.class);
+        TypedQuery<User> query = entityManager.createQuery("select u from User u where u.id = :id", User.class);
         query.setParameter("id",id);
         return query.getSingleResult();
 //      return query.getResultList().stream().findAny().orElse(null); //Можно так написать,чтобы обрабатывалась ситуация,

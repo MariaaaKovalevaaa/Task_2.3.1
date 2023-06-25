@@ -1,7 +1,6 @@
 package web.model;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 
 @Entity //Т.е. этот класс будет отображаться в БД в виде таблицы
 @Table(name = "users")//указываем, к какой именно таблице мы привязываем класс

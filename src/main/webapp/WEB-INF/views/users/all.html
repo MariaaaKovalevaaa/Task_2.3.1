@@ -2,7 +2,7 @@
 
 <!-- Ниже строчка, которая указывает, что мы используем таймлиф -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+</html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -13,8 +13,8 @@
 <!-- это подобие foreach. Здесь user - временная переменная, а ${allUsers} - это контейнер,
 а его имя - это ключ из контроллера. На выходе будет список имен, но в них заложена ссылка со значением id.
 При нажатии будет переход на view "id". А >user< будет динамически меняться  -->
-<div th:each="user : ${allUsers}">
-    <a th:href="@{/users/{id} (id=${user.getId()})}" th:text="${user.getName()}" >user</a>
+<div th:each="user : ${users}">
+    <a th:href="@{/users/{id} (id=${user.getId()})}" th:text="${user.getName()}">user</a>
 
 </div>
 
