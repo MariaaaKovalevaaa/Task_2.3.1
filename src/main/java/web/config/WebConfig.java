@@ -58,7 +58,7 @@ public class WebConfig implements WebMvcConfigurer {
     //Метод создаст бин типа ViewResolver который поможет DispatcherServlet определить
     // нужную JSP для отображения.
 
-   @Override
+
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine());

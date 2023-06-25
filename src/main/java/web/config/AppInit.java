@@ -1,11 +1,8 @@
 package web.config;
 
-import org.springframework.web.filter.HiddenHttpMethodFilter;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-
 
 // Класс AbstractAnnotationConfigDispatcherServletInitializer реализует интерфейс WebApplicationInitializer.
 //WebApplicationInitializer – это интерфейс, предоставляемый Spring MVC,
@@ -16,6 +13,9 @@ import javax.servlet.ServletException;
 // сервлетов и местоположения конфигурации DispatcherServlet.
 
 //Класс AbstractAnnotationConfigDispatcherServletInitializer - это замена конфигурационному файлу "web.xml"
+
+@Configuration
+@PropertySource(value = "classpath:application.properties")
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 
@@ -54,14 +54,16 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     //Д/его корректной работы мы ниже создаем фильтр, который будет читать скрытое hidden-поле "_method",
     // значение которого будет PATCH
     //В Спринг Boot эти методы можно будет заменить одной строкой
-    @Override
-    public void onStartup(ServletContext aServletContext) throws ServletException {
-        super.onStartup(aServletContext);
-        registerHiddenFieldFilter(aServletContext);
-    }
 
-    private void registerHiddenFieldFilter(ServletContext aContext) {
-        aContext.addFilter("hiddenHttpMethodFilter",
-                new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null, true, "/*");
-    }
+//    @Override
+//    public void onStartup(ServletContext aServletContext) throws ServletException {
+//        super.onStartup(aServletContext);
+//        registerHiddenFieldFilter(aServletContext);
+//    }
+//
+//    private void registerHiddenFieldFilter(ServletContext aContext) {
+//        aContext.addFilter("hiddenHttpMethodFilter",
+//                new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");
+//    }
+
 }
