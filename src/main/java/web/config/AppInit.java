@@ -1,13 +1,10 @@
 package web.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 
@@ -39,15 +36,16 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     //Здесь нужно указать класс, который будет описывать наш ДиспетчерСервлет
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class []{
-                WebConfig.class };
+        return new Class<?>[]{
+                WebConfig.class
+        };
     }
 
 
     //Данный метод указывает url, на котором будет базироваться приложение.
     //Т.е. все запросы пользователя мы посылаем на диспетчерСервлет, т.е. слэш - "/"
     @Override
-    protected String[] getServletMappings()  {
+    protected String[] getServletMappings() {
         return new String[]{"/"};
     }
 
@@ -60,24 +58,17 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     //В Спринг Boot эти методы можно будет заменить одной строкой
 
     @Override
-    protected Filter[] getServletFilters() {
-        CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
-        characterEncodingFilter.setEncoding("UTF-8");
-        characterEncodingFilter.setForceEncoding(true);
-        return new Filter[]{characterEncodingFilter};
-    }
-    @Override
-    public void onStartup (ServletContext aServletContext) throws ServletException {
-        super.onStartup(aServletContext);
-        FilterRegistration.Dynamic encodingFilter = aServletContext.addFilter("encodingFilter", new CharacterEncodingFilter());
-        encodingFilter.setInitParameter("encoding", "UTF-8");
-        encodingFilter.setInitParameter("forceEncoding", "true");
-        encodingFilter.addMappingForUrlPatterns(null, true, "/*");
-        registerHiddenFieldFilter(aServletContext);
+    public void onStartup(ServletContext context) throws ServletException {
+        super.onStartup(context);
+        registerHiddenFilter(context);
     }
 
-    private void registerHiddenFieldFilter(ServletContext aContext) {
-        aContext.addFilter("hiddenHttpMethodFilter",
-                new HiddenHttpMethodFilter()).addMappingForUrlPatterns(null ,true, "/*");
+    public void registerHiddenFilter(ServletContext context) {
+        context.addFilter("hiddenHttpMethodFilter", new HiddenHttpMethodFilter())
+                .addMappingForUrlPatterns(null, true, "/*");
+
+        context.addFilter("characterEncodingFilter",
+                        new CharacterEncodingFilter("UTF-8", true, true))
+                .addMappingForUrlPatterns(null, false, "/*");
     }
 }

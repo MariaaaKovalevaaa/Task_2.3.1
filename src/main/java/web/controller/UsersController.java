@@ -75,18 +75,19 @@ public class UsersController {
     //Метод, который принимает html-запрос на адрес "/users/id", т.е. во view "edit" форму заполнили,
     // нажали кнопку "Внести изменения..." и на перебросит на url-адрес "/users/id"
     //@PatchMapping, потому что мы вносим при этом изменения
-    @PatchMapping ("/{id}")
+    @PatchMapping("/{id}")
     public String update (@ModelAttribute ("user") User updateUser, @PathVariable ("id") long id) {
         userService.updateUser(id, updateUser); //Находим по id того юзера, которого надо изменить
         return "redirect:/users";
     }
 
 
-    @DeleteMapping ("/{id}")
-    public String delete (@PathVariable ("id") long id) {
+    @DeleteMapping("/{id}")
+    public String delete (@PathVariable("id") long id) {
         userService.delete(id);
         return "redirect:/users"; // После удаления делаем редирект на /users
     }
+
 
 }
 
