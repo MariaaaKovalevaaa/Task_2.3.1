@@ -13,11 +13,10 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@EnableTransactionManagement //означает, что классы, помеченные @Transactional, должны быть обернуты аспектом транзакций.
+@EnableTransactionManagement
 @ComponentScan("web")
 public class DataBaseConfig {
 
-    //DataSource используется для получения физического соединения с БД. Это альтернатива DriverManager
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -28,9 +27,6 @@ public class DataBaseConfig {
         return dataSource;
     }
 
-
-
-    //Создание SessionFactory
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
@@ -46,7 +42,6 @@ public class DataBaseConfig {
         return factoryBean;
     }
 
-    //HibernateTransactionManager автоматически открывает транзакцию Hibernate
     @Bean
     public HibernateTransactionManager getTransactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
