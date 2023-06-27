@@ -87,11 +87,4 @@ public class UsersController {
         userService.delete(id);
         return "redirect:/users"; // После удаления делаем редирект на /users
     }
-
-
 }
-
-
-
-
-
