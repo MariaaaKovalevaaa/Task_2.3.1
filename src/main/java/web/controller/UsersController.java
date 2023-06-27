@@ -60,8 +60,3 @@ public class UsersController {
         return "redirect:/users"; // После удаления делаем редирект на /users
     }
 }
-
-
-
-
-

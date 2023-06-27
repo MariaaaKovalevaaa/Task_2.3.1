@@ -48,8 +48,4 @@ public class DataBaseConfig {
         transactionManager.setSessionFactory(getSessionFactory().getObject());
         return transactionManager;
     }
-
-
-
 }
-

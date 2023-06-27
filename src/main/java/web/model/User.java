@@ -8,22 +8,13 @@ public class User {
 
     @Id // Этой аннотацией помечаем, что поле Id - primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // описывает стратегию по генерации значений д/столбца Id (автоматическое увеличение в этом случае)
-    @Column(name = "id") // указываем, с каким столбцом в таблице users нашей БД связано это поле
     private Long id;
-
-    @Column (name = "name")
     private String name;
-
-    @Column (name = "surname")
     private String surname;
-
-    @Column (name = "age")
     private Byte age;
 
     public User() {
-
     }
-
     public User(String name, String surname, Byte age) {
         this.name = name;
         this.surname = surname;
