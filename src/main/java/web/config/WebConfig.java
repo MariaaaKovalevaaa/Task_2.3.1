@@ -32,6 +32,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 
+    //Ресурс распознавателя шаблонов
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
@@ -45,6 +46,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 
+    //Двигатель шаблонов
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
@@ -54,10 +56,7 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
 
-    // Здесь мы задаем шаблонизатор. В данном случае - thymeleaf (таймлИф)
-    //Метод создаст бин типа ViewResolver который поможет DispatcherServlet определить
-    // нужную JSP для отображения.
-
+    // Здесь мы задаем шаблонизатор - распознаватель вьюшек. В данном случае - thymeleaf (таймлИф)
 
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();

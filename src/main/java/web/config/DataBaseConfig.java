@@ -28,9 +28,7 @@ public class DataBaseConfig {
         return dataSource;
     }
 
-
-
-    //Создание SessionFactory
+    //Создание SessionFactory - фабрика по производству сессий
     @Bean
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();

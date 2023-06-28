@@ -28,9 +28,12 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
         return null;
     }
 
-    //Добавление конфигурации, в которой инициализируем ViewResolver, для корректного отображения jsp. Имеется
+
+
+    //Добавление конфигурации, в которой инициализируем ViewResolver, для корректного отображения html. Имеется
     //в виду, что в классе WebConfig указаны значения prefix и suffix -
     //"templateResolver.setPrefix("/WEB-INF/pages/")" и "templateResolver.setSuffix(".html")"
+
     //Это замена файлу "applicationContext.xml".
 
     //Здесь нужно указать класс, который будет описывать наш ДиспетчерСервлет
